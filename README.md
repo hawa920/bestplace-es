@@ -9,3 +9,5 @@ little search engine project for the best place in taiwan
 6. have chrome-extension 'Allow-Control-Allow-Origin' installed
 7. launch npm server in './bp' by 'npm start' 
 8. test the page on 'localhost:8080'
+
+![](https://i.imgur.com/WWXYLEx.png)
