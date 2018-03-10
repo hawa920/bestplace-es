@@ -11,3 +11,4 @@ little search engine project for the best place in taiwan
 8. test the page on 'localhost:8080'
 
 ![](https://i.imgur.com/WWXYLEx.png)
+![](https://i.imgur.com/gnjtRNt.png)
