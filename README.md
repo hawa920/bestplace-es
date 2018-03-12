@@ -10,8 +10,8 @@ little search engine project for the best place in taiwan
 7. launch npm server in './bp' by 'npm start' 
 8. test the page on 'localhost:8080'
 
-![](https://i.imgur.com/WWXYLEx.png)
-![](https://i.imgur.com/gnjtRNt.png)
+![](https://i.imgur.com/lOk2qBq.png)
+![](https://i.imgur.com/cmqEJyU.png)
 
 
 # March 12 2018 edit
