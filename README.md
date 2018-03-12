@@ -12,3 +12,10 @@ little search engine project for the best place in taiwan
 
 ![](https://i.imgur.com/WWXYLEx.png)
 ![](https://i.imgur.com/gnjtRNt.png)
+
+
+# March 12 2018 edit
+1. search for food 
+
+![](https://i.imgur.com/dtENmya.png)
+![](https://i.imgur.com/OuXUBbD.png)
