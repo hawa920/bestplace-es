@@ -5,7 +5,7 @@ from elasticsearch import Elasticsearch
 from elasticsearch import helpers
 
 
-with open('../profile_bpintaiwan.json') as f:
+with open('./bpsample.json') as f:
   raw_data = json.load(f)
 
 
