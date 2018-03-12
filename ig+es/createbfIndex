@@ -1,0 +1,26 @@
+curl -H "Content-Type: application/json" -XPUT 'localhost:9200/bfintaiwan' -d '
+{
+  "mappings": {
+    "posts": {
+      "properties": {
+        "postURL": {
+          "type": "text"
+        },
+
+        "imgURL" : {
+          "type": "text"
+        },
+
+        "description": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+
+        "date" : {
+          "type" : "text"
+        }
+      }
+    }
+  }
+}'

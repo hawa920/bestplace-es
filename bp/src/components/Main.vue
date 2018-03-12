@@ -1,8 +1,9 @@
 <template lang="pug">
     v-app
-        v-toolbar(dark color='pink lighten-1' fixed app)
+        v-toolbar(dark :color='!mode ? "pink lighten-1" : "blue lighten-1"' fixed app)
             v-toolbar-side-icon(@click.stop='drawer = !drawer'): v-icon mdi-instagram
-            v-toolbar-title BpInTaiwan
+
+            v-toolbar-title {{mode ? "BestPlace Taiwan" : "BestFood Taiwan" }}
             v-spacer
             v-btn(icon)
                 v-icon mdi-cake
@@ -12,17 +13,19 @@
              v-container(fill-height align-center)
                 v-layout.text-xs-center(align-center wrap)
                     v-flex(xs12 md6 offset-md3)
-                        h2.amaze-title(@mouseenter='flag=false' @mouseleave='flag=true') Find Some Amazing Place To Go&nbsp;
-                            //span ✌
+                        h2.amaze-title(v-if='mode' @mouseenter='flag=false' @mouseleave='flag=true') Find Some Amazing Place To Go&nbsp;
                             span(v-show='flag') 🙌
                             span(v-show='!flag') 👐
+                        h2.amaze-title(v-else @mouseenter='flag=false' @mouseleave='flag=true') Find Some Amazing Food To Eat&nbsp;
+                            span(v-show='flag') 🍰
+                            span(v-show='!flag') 🍔
                         v-text-field.mt-5.mx-5(autofocus label='Hit The Road' v-model='keyword' @keyup.enter='search')
                         v-btn(dark large color='orange darken-1' @click='search' :loading='loading')
                             v-icon mdi-magnify
                             | &nbsp;搜尋&nbsp;&nbsp;&nbsp;
-                        v-btn(dark large color='red lighten-1' @click='search' :loading='loading2')
+                        v-btn(dark large color='red lighten-1' @click='changeMode')
                             v-icon mdi-cat
-                            | &nbsp;好手氣
+                            | &nbsp;{{ mode ? "肚子餓？" : "出去玩？"}}
                     v-flex.mt-3(md6 offset-md3 lg4 offset-lg4 d-flex v-for='item in content' :key='item._id')
                         v-card.elevation-3
                             v-container.pa-0
@@ -50,9 +53,11 @@ export default {
     data: () => ({
         flag: true,
         loading: false,
-        loading2: false,
         keyword: '',
-        content: []
+        content: [],
+        mode: true,
+        header: 'Best Place in Taiwan'
+
     }),
     methods: {
         toTop () {
@@ -63,11 +68,23 @@ export default {
             console.log(this.keyword.split(' '))
             // let result = await axios.get(`http://localhost:9200/bpintaiwan/posts/_search?q=${this.keyword}`)
             let data = { query: { match: {description: `${this.keyword}`} } }
-            let result = await axios.post('http://localhost:9200/bpintaiwan/posts/_search?size=20', data)
+            let result = null
+            if (this.mode) {
+                result = await axios.post('http://localhost:9200/bpintaiwan/posts/_search?size=20', data)
+            } else {
+                result = await axios.post('http://localhost:9200/bfintaiwan/posts/_search?size=20', data)
+            }
+
             this.content = result.data.hits.hits
             setTimeout(() => { this.loading = false }, 1000)
             this.toTop()
             console.log(result.data)
+        },
+
+        changeMode () {
+            this.mode = !this.mode
+            this.content = []
+            this.keyword = ''
         }
     }
 }
